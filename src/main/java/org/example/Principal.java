@@ -103,9 +103,18 @@ public class Principal {
             List<Funcionario> value = entry.getValue();
             System.out.println(key + ":");
             for (Funcionario funcionario : value) {
-                System.out.println(funcionario);
+                System.out.println(funcionario.getNome() + " - " + funcionario.getFuncao());
             }
             System.out.println();
+        }
+        System.out.println("-----------------------------------\n");
+
+        // #3.8 (Não tem 3.7 aaaaaaah) Imprimir os funcionários que fazem aniversário no mês 10 e 12
+        System.out.println("#3.8 Imprimir funcionarios que fazem aniversário no mês 10 e 12:");
+        for (Funcionario funcionario : listaFuncionarios) {
+            if (funcionario.getDataDeNascimento().getMonthValue() == 10 || funcionario.getDataDeNascimento().getMonthValue() == 12 ) {
+                System.out.println(funcionario.getNome() + " - mês " + funcionario.getDataDeNascimento().getMonthValue());
+            }
         }
         System.out.println("-----------------------------------\n");
     }
