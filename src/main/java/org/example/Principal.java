@@ -96,5 +96,17 @@ public class Principal {
         System.out.println("Ok!");
         System.out.println("-----------------------------------\n");
 
+        // #3.6 Imprimir funcionários agrupados por função
+        System.out.println("#3.6 Imprimir funcionarios agrupados por função:");
+        for (Map.Entry<String, List<Funcionario>> entry : mapDeFuncionarios.entrySet()) {
+            String key = entry.getKey();
+            List<Funcionario> value = entry.getValue();
+            System.out.println(key + ":");
+            for (Funcionario funcionario : value) {
+                System.out.println(funcionario);
+            }
+            System.out.println();
+        }
+        System.out.println("-----------------------------------\n");
     }
 }
