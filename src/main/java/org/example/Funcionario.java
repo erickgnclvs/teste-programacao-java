@@ -1,7 +1,9 @@
 package org.example;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Funcionario extends Pessoa {
 
@@ -40,9 +42,11 @@ public class Funcionario extends Pessoa {
 
     @Override
     public String toString() {
-        return "Funcionario{" +
-                "salario=" + salario +
-                ", funcao='" + funcao + '\'' +
-                '}';
+
+        // Editei esse método para suprir os requisitos do item #3.3
+        return "Nome: " + super.getNome() +
+                " | Data de nascimento: " + super.getDataDeNascimento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) +
+                " | Salário: R$ " + new DecimalFormat("#,##0.00").format(salario) +
+                " | Função: " + funcao;
     }
 }
