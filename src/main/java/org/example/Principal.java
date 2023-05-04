@@ -31,17 +31,21 @@ public class Principal {
          */
     }
 
-
     public static void main(String[] args) {
         // #3 Cria instância da classe Principal
         Principal principal = new Principal();
 
         // #3.1 Chama o método inserirTodosFuncionarios
+        System.out.println("#3.1 Inserir todos os funcionários:");
+        List<Funcionario> listaFuncionarios = principal.inserirTodosFuncionarios();
+        System.out.println("-----------------------------------\n");
+
+
         // #3.3 Imprime um por linha em ordem de inserção, respeitando os formatos
-        for (Funcionario funcionario : principal.inserirTodosFuncionarios()) {
+        System.out.println("#3.3 Imprimir todos os funcionários:");
+        for (Funcionario funcionario : listaFuncionarios) {
             System.out.println(funcionario);
         }
-
-
+        System.out.println("-----------------------------------\n");
     }
 }
