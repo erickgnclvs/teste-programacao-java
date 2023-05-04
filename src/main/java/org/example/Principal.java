@@ -2,6 +2,9 @@ package org.example;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class Principal {
@@ -20,7 +23,7 @@ public class Principal {
         Funcionario heloisa = new Funcionario("Heloísa", LocalDate.of(2003, 5, 24), new BigDecimal("1606.85"), "Eletricista");
         Funcionario helena = new Funcionario("Helena", LocalDate.of(1996, 9, 2), new BigDecimal("2799.93"), "Gerente");
 
-        List<Funcionario> listaDeFuncionarios = List.of(maria, joao, caio, miguel, alice, heitor, arthur, laura, heloisa, helena);
+        List<Funcionario> listaDeFuncionarios = new ArrayList<>(Arrays.asList(maria, joao, caio, miguel, alice, heitor, arthur, laura, heloisa, helena));
 
         return listaDeFuncionarios;
 
@@ -38,8 +41,22 @@ public class Principal {
         // #3.1 Chama o método inserirTodosFuncionarios
         System.out.println("#3.1 Inserir todos os funcionários:");
         List<Funcionario> listaFuncionarios = principal.inserirTodosFuncionarios();
+        System.out.println("Ok!");
         System.out.println("-----------------------------------\n");
 
+        // #3.2 Remover o funcionário João da lista
+        System.out.println("#3.2 Remover o funcionário João:");
+        int indexFuncionarioToRemove = 0;
+        for (Funcionario funcionario : listaFuncionarios) {
+            if (funcionario.getNome() == "João") {
+                // Aqui eu tentei dar list.remove(funcionario) mas não tenho como remover
+                // um item dentro de uma iteração pois alteraria os indexes, dando exception
+                indexFuncionarioToRemove = listaFuncionarios.indexOf(funcionario);
+            }
+        }
+        listaFuncionarios.remove(indexFuncionarioToRemove);
+        System.out.println("Ok!");
+        System.out.println("-----------------------------------\n");
 
         // #3.3 Imprime um por linha em ordem de inserção, respeitando os formatos
         System.out.println("#3.3 Imprimir todos os funcionários:");
