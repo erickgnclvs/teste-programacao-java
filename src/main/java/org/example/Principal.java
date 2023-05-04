@@ -2,10 +2,7 @@ package org.example;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class Principal {
 
@@ -42,6 +39,16 @@ public class Principal {
             }
         }
         return listaDeFuncionarios;
+    }
+
+    public Map<String, List<Funcionario>> agruparPorFuncao(List<Funcionario> listaDeFuncionarios) {
+        Map<String, List<Funcionario>> mapDeFuncionarios = new HashMap<>();
+        for (Funcionario funcionario : listaDeFuncionarios) {
+            List<Funcionario> funcionarioPorFuncao = mapDeFuncionarios.getOrDefault(funcionario.getFuncao(), new ArrayList<>());
+            funcionarioPorFuncao.add(funcionario);
+            mapDeFuncionarios.put(funcionario.getFuncao(), funcionarioPorFuncao);
+        }
+        return mapDeFuncionarios;
     }
 
     public static void main(String[] args) {
@@ -82,5 +89,12 @@ public class Principal {
             System.out.println(funcionario);
         }
         System.out.println("-----------------------------------\n");
+
+        // #3.5 Agrupar funcionarios por função em um Map
+        System.out.println("#3.5 Agrupar funcionarios por função em um Map:");
+        Map<String, List<Funcionario>> mapDeFuncionarios = principal.agruparPorFuncao(listaFuncionarios);
+        System.out.println("Ok!");
+        System.out.println("-----------------------------------\n");
+
     }
 }
