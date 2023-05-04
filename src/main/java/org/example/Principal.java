@@ -10,7 +10,6 @@ import java.util.List;
 public class Principal {
 
     public List<Funcionario> inserirTodosFuncionarios() {
-
         // #3.1 insere todos os funcionários em ordem
         Funcionario maria = new Funcionario("Maria", LocalDate.of(2000, 10, 18), new BigDecimal("2009.44"), "Operador");
         Funcionario joao = new Funcionario("João", LocalDate.of(1990, 5, 12), new BigDecimal("2284.38"), "Operador");
@@ -32,6 +31,17 @@ public class Principal {
           eu poderia ler os dados do arquivo em um for loop para adicionar de maneira
           mais fácil e menos repetitiva.
          */
+    }
+
+    public List<Funcionario> aumentarSalario(List<Funcionario> listaDeFuncionarios) {
+        // #3.4 Atualiza salários com aumento de 10%
+        // Adicionei um recurso a mais, para o aumento ser somente pros funcionarios, não diretor
+        for (Funcionario funcionario : listaDeFuncionarios) {
+            if (funcionario.getFuncao() != "Diretor") {
+                funcionario.setSalario(funcionario.getSalario().multiply(BigDecimal.valueOf(1.1)));
+            }
+        }
+        return listaDeFuncionarios;
     }
 
     public static void main(String[] args) {
@@ -60,6 +70,14 @@ public class Principal {
 
         // #3.3 Imprime um por linha em ordem de inserção, respeitando os formatos
         System.out.println("#3.3 Imprimir todos os funcionários:");
+        for (Funcionario funcionario : listaFuncionarios) {
+            System.out.println(funcionario);
+        }
+        System.out.println("-----------------------------------\n");
+
+        // #3.4 Atualizar lista com aumento de 10% do salário
+        System.out.println("#3.4 Aumentar salários em 10% (menos do diretor):");
+        principal.aumentarSalario(listaFuncionarios);
         for (Funcionario funcionario : listaFuncionarios) {
             System.out.println(funcionario);
         }
