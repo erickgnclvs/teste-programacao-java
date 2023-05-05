@@ -1,6 +1,9 @@
 package org.example;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.Period;
@@ -88,6 +91,7 @@ public class Principal {
             if (funcionario.getNome() == "João") {
                 // Aqui eu tentei dar list.remove(funcionario) mas não tenho como remover
                 // um item dentro de uma iteração pois alteraria os indexes, dando exception
+                // descobri que usar o loop pra achar o index e remover depois funcionava
                 indexFuncionarioToRemove = listaFuncionarios.indexOf(funcionario);
             }
         }
@@ -164,7 +168,32 @@ public class Principal {
         for (Funcionario funcionario : listaFuncionarios) {
             totalSalarios = totalSalarios.add(funcionario.getSalario());
         }
+        // Tive que pesquisar como usar o DecimalFormat, achei no stackoverflow essa dica https://stackoverflow.com/questions/26706784/how-to-make-0-display-as-0-00-using-decimal-format
         System.out.println("Total de salários: R$ " + new DecimalFormat("#,##0.00").format(totalSalarios));
         System.out.println("-----------------------------------\n");
+
+        // #3.12 Imprimir quantos salários mínimos ganha cada funcionário, considerando que o salário mínimo é R$1212.00
+        System.out.println("#3.12 Imprimir quantos salários mínimos ganha cada funcionário:");
+        for (Funcionario funcionario : listaFuncionarios) {
+            // Esse aqui eu passei um bom tempo pesquisando até entender como usar o scale argument (nesse caso "2") e RoundingMode
+            // fonte: https://stackoverflow.com/questions/33889019/bigdecimal-divide-with-a-large-number-of-decimal-places
+            BigDecimal quantSalariosMin = funcionario.getSalario().divide(new BigDecimal("1212"), 2, RoundingMode.DOWN);
+            System.out.println(funcionario.getNome() + " recebe " + quantSalariosMin + " salários mínimos");
+        }
+        System.out.println("-----------------------------------\n");
+
+        // #3.13 (extra) Imprime média salarial entre funcionários da empresa (com exceção do diretor)
+        System.out.println("#3.13 (extra) Imprime média salarial entre funcionários da empresa (com exceção do diretor)");
+        BigDecimal totalSalariosSemChefe = new BigDecimal(0);
+        for (Funcionario funcionario : listaFuncionarios) {
+            if (funcionario.getFuncao() != "Diretor") {
+                totalSalariosSemChefe = totalSalariosSemChefe.add(funcionario.getSalario());
+            }
+        }
+        int quantFuncionarios = listaFuncionarios.size() - 1;
+        BigDecimal mediaSalarial = totalSalariosSemChefe.divide(BigDecimal.valueOf(quantFuncionarios));
+        System.out.println(new DecimalFormat("#,##0.00").format(mediaSalarial));
+        System.out.println("-----------------------------------\n");
+
     }
 }
