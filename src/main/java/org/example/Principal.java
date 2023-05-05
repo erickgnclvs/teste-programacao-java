@@ -147,7 +147,7 @@ public class Principal {
         // #3.10 Imprimir a lista de funcionários por ordem alfabética
         System.out.println("#3.10 Imprimir a lista de funcionários por ordem alfabética:");
         listaFuncionarios.sort(new Comparator<Funcionario>() {
-            // O Intellij me ajudou aqui, que ferramenta incrível, fez quase tudo sozinho, o resto achei no stackoverflow
+            // Aqui eu sofri um pouquinho, não lembrava como usar o comparator. IntelliJ me ajudou bastante!
             @Override
             public int compare(Funcionario o1, Funcionario o2) {
                 return o1.getNome().compareTo(o2.getNome());
@@ -188,7 +188,7 @@ public class Principal {
         }
         int quantFuncionarios = listaFuncionarios.size() - 1;
         BigDecimal mediaSalarial = totalSalariosSemChefe.divide(BigDecimal.valueOf(quantFuncionarios));
-        System.out.println(new DecimalFormat("#,##0.00").format(mediaSalarial));
+        System.out.println("Média salarial dos funcionários: R$ " + new DecimalFormat("#,##0.00").format(mediaSalarial));
         System.out.println("-----------------------------------\n");
 
     }
