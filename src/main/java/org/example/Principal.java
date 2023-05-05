@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Principal {
 
@@ -139,6 +141,20 @@ public class Principal {
         System.out.println("#3.9 Imprimir funcionário mais velho:");
         Funcionario funcionarioMaisVelho = principal.getFuncionarioMaisVelho(listaFuncionarios);
         System.out.println(funcionarioMaisVelho.getNome() + " - Idade: " + Period.between(funcionarioMaisVelho.getDataDeNascimento(), LocalDate.now()).getYears());
+        System.out.println("-----------------------------------\n");
+
+        // #3.10 Imprimir a lista de funcionários por ordem alfabética
+        System.out.println("#3.10 Imprimir a lista de funcionários por ordem alfabética:");
+        listaFuncionarios.sort(new Comparator<Funcionario>() {
+            // O Intellij me ajudou aqui, que ferramenta incrível, fez quase tudo sozinho, o resto achei no stackoverflow
+            @Override
+            public int compare(Funcionario o1, Funcionario o2) {
+                return o1.getNome().compareTo(o2.getNome());
+            }
+        });
+        for (Funcionario funcionario : listaFuncionarios) {
+            System.out.println(funcionario.getNome());
+        }
         System.out.println("-----------------------------------\n");
     }
 }
