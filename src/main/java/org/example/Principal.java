@@ -1,6 +1,7 @@
 package org.example;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
@@ -155,6 +156,15 @@ public class Principal {
         for (Funcionario funcionario : listaFuncionarios) {
             System.out.println(funcionario.getNome());
         }
+        System.out.println("-----------------------------------\n");
+
+        // #3.11 Imprimir o total dos salários dos funcionários
+        System.out.println("#3.11 Imprimir o total dos salários dos funcionários (menos o do João, claro):");
+        BigDecimal totalSalarios = new BigDecimal(0);
+        for (Funcionario funcionario : listaFuncionarios) {
+            totalSalarios = totalSalarios.add(funcionario.getSalario());
+        }
+        System.out.println("Total de salários: R$ " + new DecimalFormat("#,##0.00").format(totalSalarios));
         System.out.println("-----------------------------------\n");
     }
 }
