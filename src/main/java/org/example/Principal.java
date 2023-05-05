@@ -2,6 +2,7 @@ package org.example;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.*;
 
 public class Principal {
@@ -49,6 +50,22 @@ public class Principal {
             mapDeFuncionarios.put(funcionario.getFuncao(), funcionarioPorFuncao);
         }
         return mapDeFuncionarios;
+    }
+
+    public Funcionario getFuncionarioMaisVelho(List<Funcionario> listaDeFuncionarios) {
+        // #3.9 Localizar funcionário mais velho
+        LocalDate maiorIdade = LocalDate.MAX;
+        for (Funcionario funcionario : listaDeFuncionarios) {
+            if (funcionario.getDataDeNascimento().isBefore(maiorIdade)) {
+                maiorIdade = funcionario.getDataDeNascimento();
+            }
+        }
+        for (Funcionario funcionario : listaDeFuncionarios) {
+            if (funcionario.getDataDeNascimento().isEqual(maiorIdade)) {
+                return funcionario;
+            }
+        }
+        return null;
     }
 
     public static void main(String[] args) {
@@ -116,6 +133,12 @@ public class Principal {
                 System.out.println(funcionario.getNome() + " - mês " + funcionario.getDataDeNascimento().getMonthValue());
             }
         }
+        System.out.println("-----------------------------------\n");
+
+        // #3.9 Imprimir o funcionário com a maior idade, exibir os atributos: nome e idade.
+        System.out.println("#3.9 Imprimir funcionário mais velho:");
+        Funcionario funcionarioMaisVelho = principal.getFuncionarioMaisVelho(listaFuncionarios);
+        System.out.println(funcionarioMaisVelho.getNome() + " - Idade: " + Period.between(funcionarioMaisVelho.getDataDeNascimento(), LocalDate.now()).getYears());
         System.out.println("-----------------------------------\n");
     }
 }
